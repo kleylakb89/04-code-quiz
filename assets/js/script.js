@@ -1,9 +1,9 @@
-var headEl = document.getElementById("head");
+var timeEl= document.getElementById("time");
 
 var timeLeft = 5;
 
 function counter() {
-    headEl.textContent = "Time: " + timeLeft;
+    timeEl.textContent = "Time: " + timeLeft;
 }
 
 function timer() {
