@@ -13,6 +13,25 @@ var againBtn = document.getElementById("againBtn");
 var timeEl = document.getElementById("time");
 
 
+// Timer function and variable
+var timeLeft = 5;
+function counter() {
+    timeEl.textContent = "Time: " + timeLeft;
+};
+
+function timer() {
+    counter();
+    var timerInterval = setInterval(function () {
+        timeLeft--;
+        counter();
+        console.log(timeLeft);
+
+        if (timeLeft === 0) {
+            clearInterval(timerInterval);
+        };
+    }, 1000);
+    return(timeLeft);
+};
 
 // TODO: switch states function
 var switchStates = function () {
@@ -26,7 +45,8 @@ var switchStates = function () {
         quizEl.style.display = "block";
         endEl.style.display = "none";
         scoresEl.style.display = "none";
-        timer();
+        var score = timer();
+        console.log(score);
     } else if (currentState === "end") {
         startEl.style.display = "none";
         quizEl.style.display = "none";
@@ -66,33 +86,10 @@ againBtn.addEventListener("click", function () {
     switchStates();
 });
 
-// Timer function and variable
-// TODO: Debug timer starting early
-var timeLeft = 5;
-function counter() {
-    timeEl.textContent = "Time: " + timeLeft;
-};
-
-function timer() {
-    counter();
-    var timerInterval = setInterval(function () {
-        timeLeft--;
-        counter();
-
-        if (timeLeft === 0) {
-            clearInterval(timerInterval);
-        };
-    }, 1000);
-};
-
-// if (currentState === "quiz") {
-//     timer();
-// };
 
 
 // TODO: write score function
-var score = timeLeft;
-console.log(score);
+
 
 
 // TODO: write questions array
