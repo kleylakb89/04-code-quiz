@@ -20,27 +20,29 @@ var answer3El = document.createElement("button");
 var answer4El = document.createElement("button");
 var rightOrWrong = document.createElement("p");
 
+rightOrWrong.textContent = "";
+
 // TODO: write questions array
 var questions = [{
-    question: "Question1?",
-    answers: ["A", "B", "C", "D"],
-    correct: "A"
+    question: "What would you use to iterate through an array?",
+    answers: ["For Loop", "If/Else", "String", "Object"],
+    correct: "For Loop"
 }, {
-    question: "Question2?",
-    answers: ["1", "2", "3", "4"],
-    correct: "4"
+    question: "What encloses a string?",
+    answers: ["Variable", "Parentheses", "Brackets", "Quotes"],
+    correct: "Quotes"
 }, {
-    question: "Question3?",
-    answers: ["C", "B", "C", "D"],
-    correct: "C"
+    question: "Which of these is a Boolean value?",
+    answers: ["Yes", "Nope", "True", "8"],
+    correct: "True"
 }, {
-    question: "Question4?",
-    answers: ["5", "6", "7", "8"],
-    correct: "7"
+    question: "What encloses an array?",
+    answers: ["Variable", "Parentheses", "Brackets", "Quotes"],
+    correct: "Brackets"
 }, {
-    question: "Question5?",
-    answers: ["E", "B", "C", "D"],
-    correct: "B"
+    question: "What do you traverse when accessing HTML?",
+    answers: ["The Web-o-verse", "DOM", "Code Snippets", "None of the above"],
+    correct: "DOM"
 }];
 
 // Timer function
