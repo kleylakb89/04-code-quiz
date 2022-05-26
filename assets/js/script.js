@@ -137,7 +137,9 @@ var saveScores = function() {
 
     var highestScores = JSON.parse(localStorage.getItem("highScore")) || [];
 
-    highestScores.push(savedScore);
+    if (savedScore.score < 75){
+        highestScores.push(savedScore);
+    }
 
     highestScores.sort(function(first, second) {
         return second.score - first.score;
@@ -155,24 +157,24 @@ var displayScores = function() {
     for (var i = 0; i < highestScores.length; i++) {
         var scoreList = document.createElement("p");
         leaderboardEl.appendChild(scoreList);
-        scoreList.textContent = highestScores[i].initials + "  " + highestScores[i].score;
+        scoreList.textContent = "Player: " + highestScores[i].initials + "  Score: " + highestScores[i].score;
     }
 }
 
 
 
 // TODO: add event listeners to buttons/answers
-startBtn.addEventListener("click", function () {
+startBtn.addEventListener("click", function() {
     currentState = "quiz";
     switchStates();
 });
 
-saveBtn.addEventListener("click", function () {
+saveBtn.addEventListener("click", function() {
     currentState = "scores";
     switchStates();
 });
 
-againBtn.addEventListener("click", function () {
+againBtn.addEventListener("click", function() {
     currentState = "start"
     switchStates();
 });
@@ -181,7 +183,6 @@ questionsEl.addEventListener("click", function(event){
     var element = event.target;
     if (element.matches("button")) {
         if (element.textContent === questions[questionsIndex].correct) {
-            console.log("correct");
             quizEl.appendChild(rightOrWrong);
             rightOrWrong.textContent = "Correct!";
         } else {

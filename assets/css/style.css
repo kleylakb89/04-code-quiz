@@ -1,10 +1,21 @@
-
-
-header {
-    display: flex;
-    justify-content: space-between;
+:root {
+    --back: rgb(137, 155, 237);
 }
 
-#leaderboard {
-    display: inline;
+body {
+    background-color: var(--back);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+}
+
+nav {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 25px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    cursor: pointer;
+}
+
+nav:hover {
+    background-color: blue;
 }
