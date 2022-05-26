@@ -15,10 +15,15 @@ var againBtn = document.getElementById("againBtn");
 var timeEl = document.getElementById("time");
 var initialsEl = document.getElementById("initials");
 var questionsEl = document.getElementById("questions");
-var aEl = document.getElementById("a");
-var bEl = document.getElementById("b");
-var cEl = document.getElementById("c");
-var dEl = document.getElementById("d");
+// var answerEl = document.querySelector(".answer");
+// var aEl = document.getElementById("a");
+// var bEl = document.getElementById("b");
+// var cEl = document.getElementById("c");
+// var dEl = document.getElementById("d");
+var answer1El = document.createElement("li");
+var answer2El = document.createElement("li");
+var answer3El = document.createElement("li");
+var answer4El = document.createElement("li");
 
 
 // Timer function
@@ -82,6 +87,79 @@ var init = function () {
   console.log(score);
 };
 
+
+
+
+
+
+// TODO: write questions array
+var questions = [{
+    question: "Question1?",
+    answers: ["A", "B", "C", "D"],
+    correct: 0
+}, {
+    question: "Question2?",
+    answers: ["1", "2", "3", "4"],
+    correct: 1
+}, {
+    question: "Question3?",
+    answers: ["C", "B", "C", "D"],
+    correct: 3
+}, {
+    question: "Question4?",
+    answers: ["5", "6", "7", "8"],
+    correct: 2
+}, {
+    question: "Question5?",
+    answers: ["E", "B", "C", "D"],
+    correct: 1
+}];
+
+console.log(questions);
+var questionsIndex = 0;
+
+
+// TODO: loop through questions
+
+var displayQuestions = function () {
+    questionsEl.textContent = questions[questionsIndex].question;
+    questionsEl.appendChild(answer1El);
+    questionsEl.appendChild(answer2El);
+    questionsEl.appendChild(answer3El);
+    questionsEl.appendChild(answer4El);
+    answer1El.textContent = questions[questionsIndex].answers[0];
+    answer2El.textContent = questions[questionsIndex].answers[1];
+    answer3El.textContent = questions[questionsIndex].answers[2];
+    answer4El.textContent = questions[questionsIndex].answers[3];
+};
+
+questionsEl.addEventListener("click", function(event){
+    var element = event.target;
+    if (element.matches("li")) {
+        questionsIndex++;
+        if (questionsIndex < questions.length) {
+            displayQuestions();
+        } else {
+            currentState = "end";
+            switchStates();
+        }
+    }
+});
+
+
+// TODO: save score and initials to local storage array of objects
+
+var scores = function() {
+    var savedScore = {
+        initials: initialsEl.value.trim(),
+        score: score
+    };
+    console.log(savedScore);
+}
+
+
+
+
 // TODO: add event listeners to buttons/answers
 startBtn.addEventListener("click", function () {
     currentState = "quiz";
@@ -102,67 +180,6 @@ againBtn.addEventListener("click", function () {
     currentState = "start"
     switchStates();
 });
-
-
-
-
-
-// TODO: write questions array
-var questions = [{
-    question: "Question?",
-    answers: ["A", "B", "C", "D"],
-    correct: 0
-}, {
-    question: "Question?",
-    answers: ["A", "B", "C", "D"],
-    correct: 1
-}, {
-    question: "Question?",
-    answers: ["A", "B", "C", "D"],
-    correct: 3
-}, {
-    question: "Question?",
-    answers: ["A", "B", "C", "D"],
-    correct: 2
-}, {
-    question: "Question?",
-    answers: ["A", "B", "C", "D"],
-    correct: 1
-}];
-
-console.log(questions);
-var questionsIndex = 0;
-var answersIndex = 0;
-
-
-// TODO: loop through questions
-
-var displayQuestions = function () {
-
-    questionsEl.textContent = questions[questionsIndex].question;
-    aEl.textContent = questions[questionsIndex].answers[answersIndex];
-    bEl.textContent = questions[questionsIndex].answers[answersIndex];
-    cEl.textContent = questions[questionsIndex].answers[answersIndex];
-    dEl.textContent = questions[questionsIndex].answers[answersIndex];
-
-};
-
-
-
-
-// TODO: save score and initials to local storage array of objects
-
-var scores = function() {
-    var savedScore = {
-        initials: initialsEl.value.trim(),
-        score: score
-    };
-    console.log(savedScore);
-}
-
-
-
-
 
 
 
