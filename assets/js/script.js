@@ -14,19 +14,19 @@ var saveBtn = document.getElementById("saveBtn");
 var againBtn = document.getElementById("againBtn");
 var timeEl = document.getElementById("time");
 var initialsEl = document.getElementById("initials");
+var questionsEl = document.getElementById("questions");
 
 
 // Timer function
-// TODO: Debug when timer restarts on a replay
 function counter() {
     timeEl.textContent = "Time: " + timeLeft;
 };
 
 function timer() {
-    counter();
     if (timeLeft < 5){
         timeLeft = 5;
     };
+    counter();
     var timerInterval = setInterval(function () {
         timeLeft--;
         counter();
@@ -35,6 +35,7 @@ function timer() {
             clearInterval(timerInterval);
         };
     }, 1000);
+    console.log(timeLeft);
     return(timeLeft);
 };
 
@@ -52,6 +53,8 @@ var switchStates = function () {
         endEl.style.display = "none";
         scoresEl.style.display = "none";
         var score = timer();
+        displayQuestions();
+        console.log(score);
         return(score);
     }
     if (currentState === "end") {
@@ -71,7 +74,8 @@ var switchStates = function () {
 
 // TODO: initializing function
 var init = function () {
-    switchStates();
+  var score = switchStates();
+  console.log(score);
 };
 
 // TODO: add event listeners to buttons/answers
@@ -100,7 +104,46 @@ againBtn.addEventListener("click", function () {
 
 
 // TODO: write questions array
+var questions = [{
+    Question: "Question?",
+    AnswerA: "A", 
+    AnswerB: "B",
+    AnswerC: "C", 
+    AnswerD: "D"
+}, {
+    Question: "Question?",
+    AnswerA: "A", 
+    AnswerB: "B",
+    AnswerC: "C", 
+    AnswerD: "D"
+}, {
+    Question: "Question?",
+    AnswerA: "A", 
+    AnswerB: "B",
+    AnswerC: "C", 
+    AnswerD: "D"
+}, {
+    Question: "Question?",
+    AnswerA: "A", 
+    AnswerB: "B",
+    AnswerC: "C", 
+    AnswerD: "D"
+}, {
+    Question: "Question?",
+    AnswerA: "A", 
+    AnswerB: "B",
+    AnswerC: "C", 
+    AnswerD: "D"
+}];
+
+
 // TODO: loop through questions
+var displayQuestions = function () {
+    questionsEl.textContent = questions;
+
+};
+
+
 // TODO: save score and initials to local storage array of objects
 
 var scores = function() {
@@ -117,4 +160,4 @@ var scores = function() {
 
 
 
-var score = init();
+init();
