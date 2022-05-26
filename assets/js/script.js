@@ -207,8 +207,10 @@ questionsEl.addEventListener("click", function(event){
 });
 
 viewScoresEL.addEventListener("click", function(){
-    currentState = "scores";
-    switchStates();
+    if (currentState !== "scores"){
+        currentState = "scores";
+        switchStates();
+    }
 })
 
 
