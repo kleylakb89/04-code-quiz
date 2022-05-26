@@ -109,7 +109,7 @@ var switchStates = function () {
         quizEl.style.display = "none";
         endEl.style.display = "none";
         scoresEl.style.display = "block";
-        scores();
+        saveScores();
     }
 };
 
@@ -126,13 +126,33 @@ var displayEnd = function() {
 
 // TODO: save score and initials to local storage array of objects
 
-var scores = function() {
+var saveScores = function() {
     var savedScore = {
         initials: initialsEl.value.trim(),
         score: timeLeft
     };
-    console.log(savedScore);
+
+    var highestScores = JSON.parse(localStorage.getItem("highScore")) || [];
+
+    highestScores.push(savedScore);
+
+    highestScores = [{
+        initials: "KBK",
+        score: 28
+    },{
+        initials: "MAM",
+        score: 39
+    }];
+    console.log(highestScores);
+
+    highestScores.sort(function(first, second) {
+        return second.score - first.score;
+    });
+    console.log(highestScores);
 }
+
+
+
 
 
 
