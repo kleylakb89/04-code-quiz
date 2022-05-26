@@ -2,6 +2,7 @@
 var currentState = "start";
 var timeLeft = 5;
 var questionsIndex = 0;
+var userInput = "";
 
 var startEl = document.getElementById("start");
 var quizEl = document.getElementById("quiz");
@@ -14,32 +15,32 @@ var timeEl = document.getElementById("time");
 var initialsEl = document.getElementById("initials");
 var questionsEl = document.getElementById("questions");
 
-var answer1El = document.createElement("li");
-var answer2El = document.createElement("li");
-var answer3El = document.createElement("li");
-var answer4El = document.createElement("li");
+var answer1El = document.createElement("button");
+var answer2El = document.createElement("button");
+var answer3El = document.createElement("button");
+var answer4El = document.createElement("button");
 
 // TODO: write questions array
 var questions = [{
     question: "Question1?",
     answers: ["A", "B", "C", "D"],
-    correct: 0
+    correct: "A"
 }, {
     question: "Question2?",
     answers: ["1", "2", "3", "4"],
-    correct: 1
+    correct: "4"
 }, {
     question: "Question3?",
     answers: ["C", "B", "C", "D"],
-    correct: 3
+    correct: "C"
 }, {
     question: "Question4?",
     answers: ["5", "6", "7", "8"],
-    correct: 2
+    correct: "7"
 }, {
     question: "Question5?",
     answers: ["E", "B", "C", "D"],
-    correct: 1
+    correct: "B"
 }];
 
 // Timer function
@@ -146,7 +147,13 @@ againBtn.addEventListener("click", function () {
 
 questionsEl.addEventListener("click", function(event){
     var element = event.target;
-    if (element.matches("li")) {
+    if (element.matches("button")) {
+        // console.log(questions[questionsIndex].correct);
+        // console.log(questions[questionsIndex].answers[0]);
+        console.log(element.textContent);
+        if (element.textContent === questions[questionsIndex].correct) {
+            console.log("test");
+        }
         questionsIndex++;
         if (questionsIndex < questions.length) {
             displayQuestions();
