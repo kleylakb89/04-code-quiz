@@ -136,18 +136,11 @@ var saveScores = function() {
 
     highestScores.push(savedScore);
 
-    highestScores = [{
-        initials: "KBK",
-        score: 28
-    },{
-        initials: "MAM",
-        score: 39
-    }];
-    console.log(highestScores);
-
     highestScores.sort(function(first, second) {
         return second.score - first.score;
     });
+
+    localStorage.setItem("highScore", JSON.stringify(highestScores));
     console.log(highestScores);
 }
 
