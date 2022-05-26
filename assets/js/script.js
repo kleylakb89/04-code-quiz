@@ -15,6 +15,10 @@ var againBtn = document.getElementById("againBtn");
 var timeEl = document.getElementById("time");
 var initialsEl = document.getElementById("initials");
 var questionsEl = document.getElementById("questions");
+var aEl = document.getElementById("a");
+var bEl = document.getElementById("b");
+var cEl = document.getElementById("c");
+var dEl = document.getElementById("d");
 
 
 // Timer function
@@ -105,43 +109,45 @@ againBtn.addEventListener("click", function () {
 
 // TODO: write questions array
 var questions = [{
-    Question: "Question?",
-    AnswerA: "A", 
-    AnswerB: "B",
-    AnswerC: "C", 
-    AnswerD: "D"
+    question: "Question?",
+    answers: ["A", "B", "C", "D"],
+    correct: 0
 }, {
-    Question: "Question?",
-    AnswerA: "A", 
-    AnswerB: "B",
-    AnswerC: "C", 
-    AnswerD: "D"
+    question: "Question?",
+    answers: ["A", "B", "C", "D"],
+    correct: 1
 }, {
-    Question: "Question?",
-    AnswerA: "A", 
-    AnswerB: "B",
-    AnswerC: "C", 
-    AnswerD: "D"
+    question: "Question?",
+    answers: ["A", "B", "C", "D"],
+    correct: 3
 }, {
-    Question: "Question?",
-    AnswerA: "A", 
-    AnswerB: "B",
-    AnswerC: "C", 
-    AnswerD: "D"
+    question: "Question?",
+    answers: ["A", "B", "C", "D"],
+    correct: 2
 }, {
-    Question: "Question?",
-    AnswerA: "A", 
-    AnswerB: "B",
-    AnswerC: "C", 
-    AnswerD: "D"
+    question: "Question?",
+    answers: ["A", "B", "C", "D"],
+    correct: 1
 }];
+
+console.log(questions);
+var questionsIndex = 0;
+var answersIndex = 0;
 
 
 // TODO: loop through questions
+
 var displayQuestions = function () {
-    questionsEl.textContent = questions;
+
+    questionsEl.textContent = questions[questionsIndex].question;
+    aEl.textContent = questions[questionsIndex].answers[answersIndex];
+    bEl.textContent = questions[questionsIndex].answers[answersIndex];
+    cEl.textContent = questions[questionsIndex].answers[answersIndex];
+    dEl.textContent = questions[questionsIndex].answers[answersIndex];
 
 };
+
+
 
 
 // TODO: save score and initials to local storage array of objects
