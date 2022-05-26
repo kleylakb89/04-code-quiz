@@ -14,6 +14,7 @@ var timeEl = document.getElementById("time");
 var initialsEl = document.getElementById("initials");
 var questionsEl = document.getElementById("questions");
 var leaderboardEl = document.getElementById("leaderboard");
+var viewScoresEL = document.getElementById("viewScores");
 
 var answer1El = document.createElement("button");
 var answer2El = document.createElement("button");
@@ -204,6 +205,11 @@ questionsEl.addEventListener("click", function(event){
         }
     }
 });
+
+viewScoresEL.addEventListener("click", function(){
+    currentState = "scores";
+    switchStates();
+})
 
 
 init();
