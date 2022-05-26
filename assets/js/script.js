@@ -13,6 +13,7 @@ var againBtn = document.getElementById("againBtn");
 var timeEl = document.getElementById("time");
 var initialsEl = document.getElementById("initials");
 var questionsEl = document.getElementById("questions");
+var leaderboardEl = document.getElementById("leaderboard");
 
 var answer1El = document.createElement("button");
 var answer2El = document.createElement("button");
@@ -110,6 +111,7 @@ var switchStates = function () {
         endEl.style.display = "none";
         scoresEl.style.display = "block";
         saveScores();
+        displayScores();
     }
 };
 
@@ -140,13 +142,21 @@ var saveScores = function() {
         return second.score - first.score;
     });
 
+    if (highestScores.length > 10) {
+        highestScores.pop();
+    }
+
     localStorage.setItem("highScore", JSON.stringify(highestScores));
-    console.log(highestScores);
 }
 
-
-
-
+var displayScores = function() {
+    var highestScores = JSON.parse(localStorage.getItem("highScore")) || [];
+    for (var i = 0; i < highestScores.length; i++) {
+        var scoreList = document.createElement("p");
+        leaderboardEl.appendChild(scoreList);
+        scoreList.textContent = highestScores[i].initials + "  " + highestScores[i].score;
+    }
+}
 
 
 
