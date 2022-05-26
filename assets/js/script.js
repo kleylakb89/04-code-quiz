@@ -18,6 +18,7 @@ var answer1El = document.createElement("button");
 var answer2El = document.createElement("button");
 var answer3El = document.createElement("button");
 var answer4El = document.createElement("button");
+var rightOrWrong = document.createElement("p");
 
 // TODO: write questions array
 var questions = [{
@@ -149,8 +150,12 @@ questionsEl.addEventListener("click", function(event){
     if (element.matches("button")) {
         if (element.textContent === questions[questionsIndex].correct) {
             console.log("correct");
+            quizEl.appendChild(rightOrWrong);
+            rightOrWrong.textContent = "Correct!"
         } else {
             timeLeft -= 10;
+            quizEl.appendChild(rightOrWrong);
+            rightOrWrong.textContent = "Wrong!"
         }
         questionsIndex++;
         if (questionsIndex < questions.length) {
