@@ -1,6 +1,6 @@
 // TODO: query states
 var currentState = "start";
-var timeLeft = 75;
+var timeLeft = 5;
 var questionsIndex = 0;
 
 var startEl = document.getElementById("start");
@@ -51,8 +51,8 @@ function counter() {
 };
 
 function timer() {
-    if (timeLeft < 75){
-        timeLeft = 75;
+    if (timeLeft < 5){
+        timeLeft = 5;
     };
     counter();
     var timerInterval = setInterval(function () {
@@ -61,6 +61,7 @@ function timer() {
         
         if (timeLeft === 0 || currentState !== "quiz") {
             clearInterval(timerInterval);
+            displayEnd();
         };
     }, 1000);
 };
@@ -116,6 +117,11 @@ var switchStates = function () {
 var init = function () {
   switchStates();
 };
+
+var displayEnd = function() {
+    currentState = "end";
+    switchStates();
+}
 
 
 // TODO: save score and initials to local storage array of objects
