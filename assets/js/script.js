@@ -14,7 +14,13 @@ var timeEl = document.getElementById("time");
 
 
 // Timer function and variable
+// TODO: Debug timer going negative on replay
 var timeLeft = 5;
+
+if (timeLeft === 0){
+    timeLeft = 5;
+};
+
 function counter() {
     timeEl.textContent = "Time: " + timeLeft;
 };
@@ -26,7 +32,7 @@ function timer() {
         counter();
         console.log(timeLeft);
 
-        if (timeLeft === 0) {
+        if (timeLeft === 0 || currentState !== "quiz") {
             clearInterval(timerInterval);
         };
     }, 1000);
@@ -45,6 +51,7 @@ var switchStates = function () {
         quizEl.style.display = "block";
         endEl.style.display = "none";
         scoresEl.style.display = "none";
+        // TODO: Debug score continuing to drop after switching states
         var score = timer();
         console.log(score);
     } else if (currentState === "end") {
