@@ -1,96 +1,23 @@
 // TODO: query states
 var currentState = "start";
 var timeLeft = 5;
+var questionsIndex = 0;
 
 var startEl = document.getElementById("start");
 var quizEl = document.getElementById("quiz");
 var endEl = document.getElementById("end");
 var scoresEl = document.getElementById("scores");
 var startBtn = document.getElementById("startBtn");
-
-var testEl = document.getElementById("test");
-
 var saveBtn = document.getElementById("saveBtn");
 var againBtn = document.getElementById("againBtn");
 var timeEl = document.getElementById("time");
 var initialsEl = document.getElementById("initials");
 var questionsEl = document.getElementById("questions");
-// var answerEl = document.querySelector(".answer");
-// var aEl = document.getElementById("a");
-// var bEl = document.getElementById("b");
-// var cEl = document.getElementById("c");
-// var dEl = document.getElementById("d");
+
 var answer1El = document.createElement("li");
 var answer2El = document.createElement("li");
 var answer3El = document.createElement("li");
 var answer4El = document.createElement("li");
-
-
-// Timer function
-function counter() {
-    timeEl.textContent = "Time: " + timeLeft;
-};
-
-function timer() {
-    if (timeLeft < 5){
-        timeLeft = 5;
-    };
-    counter();
-    var timerInterval = setInterval(function () {
-        timeLeft--;
-        counter();
-        
-        if (timeLeft === 0 || currentState !== "quiz") {
-            clearInterval(timerInterval);
-        };
-    }, 1000);
-    console.log(timeLeft);
-    return(timeLeft);
-};
-
-// TODO: switch states function
-var switchStates = function () {
-    if (currentState === "start") {
-        startEl.style.display = "block";
-        quizEl.style.display = "none";
-        endEl.style.display = "none";
-        scoresEl.style.display = "none";
-    }
-    if (currentState === "quiz") {
-        startEl.style.display = "none";
-        quizEl.style.display = "block";
-        endEl.style.display = "none";
-        scoresEl.style.display = "none";
-        var score = timer();
-        displayQuestions();
-        console.log(score);
-        return(score);
-    }
-    if (currentState === "end") {
-        startEl.style.display = "none";
-        quizEl.style.display = "none";
-        endEl.style.display = "block";
-        scoresEl.style.display = "none";
-    } 
-    if (currentState === "scores") {
-        startEl.style.display = "none";
-        quizEl.style.display = "none";
-        endEl.style.display = "none";
-        scoresEl.style.display = "block";
-        scores();
-    }
-};
-
-// TODO: initializing function
-var init = function () {
-  var score = switchStates();
-  console.log(score);
-};
-
-
-
-
-
 
 // TODO: write questions array
 var questions = [{
@@ -115,13 +42,31 @@ var questions = [{
     correct: 1
 }];
 
-console.log(questions);
-var questionsIndex = 0;
+// Timer function
+function counter() {
+    timeEl.textContent = "Time: " + timeLeft;
+};
 
+function timer() {
+    if (timeLeft < 5){
+        timeLeft = 5;
+    };
+    counter();
+    var timerInterval = setInterval(function () {
+        timeLeft--;
+        counter();
+        
+        if (timeLeft === 0 || currentState !== "quiz") {
+            clearInterval(timerInterval);
+        };
+    }, 1000);
+};
 
-// TODO: loop through questions
-
+// TODO: display questions
 var displayQuestions = function () {
+    if(questionsIndex>=questions.length){
+        questionsIndex = 0;
+    }
     questionsEl.textContent = questions[questionsIndex].question;
     questionsEl.appendChild(answer1El);
     questionsEl.appendChild(answer2El);
@@ -133,18 +78,41 @@ var displayQuestions = function () {
     answer4El.textContent = questions[questionsIndex].answers[3];
 };
 
-questionsEl.addEventListener("click", function(event){
-    var element = event.target;
-    if (element.matches("li")) {
-        questionsIndex++;
-        if (questionsIndex < questions.length) {
-            displayQuestions();
-        } else {
-            currentState = "end";
-            switchStates();
-        }
+// TODO: switch states function
+var switchStates = function () {
+    if (currentState === "start") {
+        startEl.style.display = "block";
+        quizEl.style.display = "none";
+        endEl.style.display = "none";
+        scoresEl.style.display = "none";
     }
-});
+    if (currentState === "quiz") {
+        startEl.style.display = "none";
+        quizEl.style.display = "block";
+        endEl.style.display = "none";
+        scoresEl.style.display = "none";
+        timer();
+        displayQuestions();
+    }
+    if (currentState === "end") {
+        startEl.style.display = "none";
+        quizEl.style.display = "none";
+        endEl.style.display = "block";
+        scoresEl.style.display = "none";
+    } 
+    if (currentState === "scores") {
+        startEl.style.display = "none";
+        quizEl.style.display = "none";
+        endEl.style.display = "none";
+        scoresEl.style.display = "block";
+        scores();
+    }
+};
+
+// TODO: initializing function
+var init = function () {
+  switchStates();
+};
 
 
 // TODO: save score and initials to local storage array of objects
@@ -152,7 +120,7 @@ questionsEl.addEventListener("click", function(event){
 var scores = function() {
     var savedScore = {
         initials: initialsEl.value.trim(),
-        score: score
+        score: timeLeft
     };
     console.log(savedScore);
 }
@@ -166,11 +134,6 @@ startBtn.addEventListener("click", function () {
     switchStates();
 });
 
-testEl.addEventListener("click", function () {
-    currentState = "end";
-    switchStates();
-});
-
 saveBtn.addEventListener("click", function () {
     currentState = "scores";
     switchStates();
@@ -181,6 +144,18 @@ againBtn.addEventListener("click", function () {
     switchStates();
 });
 
+questionsEl.addEventListener("click", function(event){
+    var element = event.target;
+    if (element.matches("li")) {
+        questionsIndex++;
+        if (questionsIndex < questions.length) {
+            displayQuestions();
+        } else {
+            currentState = "end";
+            switchStates();
+        }
+    }
+});
 
 
 init();
