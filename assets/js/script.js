@@ -1,6 +1,6 @@
 // TODO: query states
 var currentState = "start";
-var timeLeft = 5;
+var timeLeft = 75;
 var questionsIndex = 0;
 
 var startEl = document.getElementById("start");
@@ -51,8 +51,8 @@ function counter() {
 };
 
 function timer() {
-    if (timeLeft < 5){
-        timeLeft = 5;
+    if (timeLeft < 75){
+        timeLeft = 75;
     };
     counter();
     var timerInterval = setInterval(function () {
@@ -159,11 +159,18 @@ questionsEl.addEventListener("click", function(event){
         if (element.textContent === questions[questionsIndex].correct) {
             console.log("correct");
             quizEl.appendChild(rightOrWrong);
-            rightOrWrong.textContent = "Correct!"
+            rightOrWrong.textContent = "Correct!";
         } else {
-            timeLeft -= 10;
-            quizEl.appendChild(rightOrWrong);
-            rightOrWrong.textContent = "Wrong!"
+            if (timeLeft >= 10){
+                timeLeft -= 10;
+                quizEl.appendChild(rightOrWrong);
+                rightOrWrong.textContent = "Wrong!";
+            } else {
+                timeLeft = 1;
+                quizEl.appendChild(rightOrWrong);
+                rightOrWrong.textContent = "Wrong!";
+                displayEnd();
+            }
         }
         questionsIndex++;
         if (questionsIndex < questions.length) {
