@@ -1,8 +1,7 @@
 // TODO: query states
 var currentState = "start";
-var timeLeft = 5;
+var timeLeft = 75;
 var questionsIndex = 0;
-var userInput = "";
 
 var startEl = document.getElementById("start");
 var quizEl = document.getElementById("quiz");
@@ -49,8 +48,8 @@ function counter() {
 };
 
 function timer() {
-    if (timeLeft < 5){
-        timeLeft = 5;
+    if (timeLeft < 75){
+        timeLeft = 75;
     };
     counter();
     var timerInterval = setInterval(function () {
@@ -148,11 +147,10 @@ againBtn.addEventListener("click", function () {
 questionsEl.addEventListener("click", function(event){
     var element = event.target;
     if (element.matches("button")) {
-        // console.log(questions[questionsIndex].correct);
-        // console.log(questions[questionsIndex].answers[0]);
-        console.log(element.textContent);
         if (element.textContent === questions[questionsIndex].correct) {
-            console.log("test");
+            console.log("correct");
+        } else {
+            timeLeft -= 10;
         }
         questionsIndex++;
         if (questionsIndex < questions.length) {
