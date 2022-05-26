@@ -17,9 +17,6 @@ var timeEl = document.getElementById("time");
 // TODO: Debug timer going negative on replay
 var timeLeft = 5;
 
-if (timeLeft === 0){
-    timeLeft = 5;
-};
 
 function counter() {
     timeEl.textContent = "Time: " + timeLeft;
@@ -27,6 +24,9 @@ function counter() {
 
 function timer() {
     counter();
+    if (timeLeft === 0){
+        timeLeft = 5;
+    };
     var timerInterval = setInterval(function () {
         timeLeft--;
         counter();
@@ -51,7 +51,6 @@ var switchStates = function () {
         quizEl.style.display = "block";
         endEl.style.display = "none";
         scoresEl.style.display = "none";
-        // TODO: Debug score continuing to drop after switching states
         var score = timer();
         console.log(score);
     } else if (currentState === "end") {
