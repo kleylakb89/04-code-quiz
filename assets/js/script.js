@@ -1,5 +1,7 @@
 // TODO: query states
 var currentState = "start";
+var timeLeft = 5;
+
 var startEl = document.getElementById("start");
 var quizEl = document.getElementById("quiz");
 var endEl = document.getElementById("end");
@@ -11,27 +13,24 @@ var testEl = document.getElementById("test");
 var saveBtn = document.getElementById("saveBtn");
 var againBtn = document.getElementById("againBtn");
 var timeEl = document.getElementById("time");
+var initialsEl = document.getElementById("initials");
 
 
-// Timer function and variable
-// TODO: Debug timer going negative on replay
-var timeLeft = 5;
-
-
+// Timer function
+// TODO: Debug when timer restarts on a replay
 function counter() {
     timeEl.textContent = "Time: " + timeLeft;
 };
 
 function timer() {
     counter();
-    if (timeLeft === 0){
+    if (timeLeft < 5){
         timeLeft = 5;
     };
     var timerInterval = setInterval(function () {
         timeLeft--;
         counter();
-        console.log(timeLeft);
-
+        
         if (timeLeft === 0 || currentState !== "quiz") {
             clearInterval(timerInterval);
         };
@@ -46,23 +45,27 @@ var switchStates = function () {
         quizEl.style.display = "none";
         endEl.style.display = "none";
         scoresEl.style.display = "none";
-    } else if (currentState === "quiz") {
+    }
+    if (currentState === "quiz") {
         startEl.style.display = "none";
         quizEl.style.display = "block";
         endEl.style.display = "none";
         scoresEl.style.display = "none";
         var score = timer();
-        console.log(score);
-    } else if (currentState === "end") {
+        return(score);
+    }
+    if (currentState === "end") {
         startEl.style.display = "none";
         quizEl.style.display = "none";
         endEl.style.display = "block";
         scoresEl.style.display = "none";
-    } else if (currentState === "scores") {
+    } 
+    if (currentState === "scores") {
         startEl.style.display = "none";
         quizEl.style.display = "none";
         endEl.style.display = "none";
         scoresEl.style.display = "block";
+        scores();
     }
 };
 
@@ -94,18 +97,24 @@ againBtn.addEventListener("click", function () {
 
 
 
-// TODO: write score function
-
 
 
 // TODO: write questions array
 // TODO: loop through questions
 // TODO: save score and initials to local storage array of objects
 
+var scores = function() {
+    var savedScore = {
+        initials: initialsEl.value.trim(),
+        score: score
+    };
+    console.log(savedScore);
+}
 
 
 
 
 
 
-init();
+
+var score = init();
