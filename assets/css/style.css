@@ -43,6 +43,11 @@ button:hover {
     cursor: pointer;
 }
 
+#disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 #start p {
     text-align: center;
     padding: 10px;

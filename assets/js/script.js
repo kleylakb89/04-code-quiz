@@ -89,12 +89,15 @@ var switchStates = function () {
         quizEl.style.display = "none";
         endEl.style.display = "none";
         scoresEl.style.display = "none";
+        viewScoresEL.setAttribute("id", "viewScores");
+
     }
     if (currentState === "quiz") {
         startEl.style.display = "none";
         quizEl.style.display = "block";
         endEl.style.display = "none";
         scoresEl.style.display = "none";
+        viewScoresEL.setAttribute("id", "disabled");
         timer();
         displayQuestions();
     }
@@ -103,12 +106,14 @@ var switchStates = function () {
         quizEl.style.display = "none";
         endEl.style.display = "block";
         scoresEl.style.display = "none";
+        viewScoresEL.setAttribute("id", "viewScores");
     } 
     if (currentState === "scores") {
         startEl.style.display = "none";
         quizEl.style.display = "none";
         endEl.style.display = "none";
         scoresEl.style.display = "block";
+        viewScoresEL.setAttribute("id", "viewScores");
         saveScores();
         leaderboardEl.innerHTML = "";
         displayScores();
@@ -209,10 +214,15 @@ questionsEl.addEventListener("click", function(event){
 });
 
 viewScoresEL.addEventListener("click", function(){
-    if (currentState !== "scores"){
+    if (currentState === "start"){
+        viewScoresEL.textContent = "Back";
         currentState = "scores";
         switchStates();
-    }
+    } else if (currentState === "scores") {
+        viewScoresEL.textContent = "View High Scores";
+        currentState = "start";
+        switchStates();
+    };
 })
 
 
