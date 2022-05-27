@@ -90,6 +90,7 @@ var switchStates = function () {
         endEl.style.display = "none";
         scoresEl.style.display = "none";
         viewScoresEL.setAttribute("id", "viewScores");
+        viewScoresEL.textContent = "View High Scores";
 
     }
     if (currentState === "quiz") {
@@ -107,6 +108,7 @@ var switchStates = function () {
         endEl.style.display = "block";
         scoresEl.style.display = "none";
         viewScoresEL.setAttribute("id", "viewScores");
+        viewScoresEL.textContent = "Back";
     } 
     if (currentState === "scores") {
         startEl.style.display = "none";
@@ -213,8 +215,8 @@ questionsEl.addEventListener("click", function(event){
     }
 });
 
-viewScoresEL.addEventListener("click", function(){
-    if (currentState === "start"){
+viewScoresEL.addEventListener("click", function() {
+    if (currentState === "start") {
         viewScoresEL.textContent = "Back";
         currentState = "scores";
         switchStates();
@@ -222,7 +224,11 @@ viewScoresEL.addEventListener("click", function(){
         viewScoresEL.textContent = "View High Scores";
         currentState = "start";
         switchStates();
-    };
+    } else if (currentState === "end") {
+        viewScoresEL.textContent = "Back";
+        currentState = "start";
+        switchStates();
+    }
 })
 
 
