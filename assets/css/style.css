@@ -28,22 +28,62 @@ h2 {
     padding: 10px;
 }
 
-#start p {
-    text-align: center;
-    padding: 10px;
-}
-
-#start button {
+button {
+    border: none;
+    background-color: blueviolet;
+    color: var(--fColor);
+    border-radius: 25px;
+    padding: 8px;
     display: block;
     margin: 0 auto;
 }
 
 button:hover {
+    background-color: var(--bColor);
     cursor: pointer;
+}
+
+#start p {
+    text-align: center;
+    padding: 10px;
 }
 
 #time {
     display: flex;
     justify-content: flex-end;
     padding: 0 20px 0 0;
+}
+
+#questions {
+    text-align: center;
+    padding: 8px;
+}
+
+#questions button {
+    margin: 8px auto;
+    width: 10%;
+}
+
+#questions button:hover {
+    width: 11%;
+    transition: all 250ms ease;
+}
+
+#quiz p {
+    text-align: center;
+}
+
+#end {
+    text-align: center;
+    padding: 8px;
+}
+
+#initials {
+    display: block;
+    margin: 8px auto;
+}
+
+#leaderboard {
+    text-align: center;
+    padding: 8px;
 }
