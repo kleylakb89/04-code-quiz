@@ -10,11 +10,13 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 <body>
+    <!-- id "viewScores" will change to "disabled" at certain points in js -->
     <nav>
         <h2 id="viewScores">View High Scores</h2>
     </nav>
 
     <main>
+        <!-- sections are switched between in js so only one section shows at a time -->
         <section id="start">
             <h2>Start Quiz</h2>
             <p>This quiz will test your JavaScript knowledge. Answer all the questions before time runs out and save your score. Click start to begin!</p>
@@ -22,7 +24,7 @@
         </section>
         <section id="quiz">
             <div id="time"></div>
-            <h2>Questions Array</h2>
+            <h2>Quiz Time!</h2>
             <p id="questions"></p>
         </section>
         <section id="end">

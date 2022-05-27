@@ -1,4 +1,4 @@
-// TODO: query states
+// establish variables and queried states
 var currentState = "start";
 var timeLeft = 75;
 var questionsIndex = 0;
@@ -22,7 +22,7 @@ var answer3El = document.createElement("button");
 var answer4El = document.createElement("button");
 var rightOrWrong = document.createElement("p");
 
-// TODO: write questions array
+// questions array of objects for quiz
 var questions = [{
     question: "What would you use to iterate through an array?",
     answers: ["For Loop", "If/Else", "String", "Object"],
@@ -66,7 +66,7 @@ function timer() {
     }, 1000);
 };
 
-// TODO: display questions
+// display questions - appends and fills content of questions and answers
 var displayQuestions = function () {
     if(questionsIndex>=questions.length){
         questionsIndex = 0;
@@ -82,7 +82,7 @@ var displayQuestions = function () {
     answer4El.textContent = questions[questionsIndex].answers[3];
 };
 
-// TODO: switch states function
+// switch states function - sets sections of HTML to either display block or none depending on what is the currentState. This way, start screen will always be the start button, the quiz will cycle through the questions, the end screen will game over, and high scores will display the scores
 var switchStates = function () {
     if (currentState === "start") {
         startEl.style.display = "block";
@@ -122,42 +122,48 @@ var switchStates = function () {
     }
 };
 
-// TODO: initializing function
+// intializing function - how the page will begin
 var init = function () {
   switchStates();
 };
 
+// for when the end screen needs to display
 var displayEnd = function() {
     currentState = "end";
     switchStates();
 }
 
 
-// TODO: save score and initials to local storage array of objects
-
+// save score and initials to local storage array of objects
 var saveScores = function() {
+    // sets a single object variable with the input initials and remaining time
     var savedScore = {
         initials: initialsEl.value.trim(),
         score: timeLeft
     };
-
+    // pulls the high scores from local storage if they exist
     var highestScores = JSON.parse(localStorage.getItem("highScore")) || [];
 
+    // keeps scores below the start time
     if (savedScore.score < 75){
         highestScores.push(savedScore);
     }
 
+    // organizes scores highest first
     highestScores.sort(function(first, second) {
         return second.score - first.score;
     });
 
+    // keeps saved scores from going beyond 10 total
     if (highestScores.length > 10) {
         highestScores.pop();
     }
 
+    // sets high scores in local storage
     localStorage.setItem("highScore", JSON.stringify(highestScores));
 }
 
+// to display scores, pulls them from local storage, the loops and appends the list as paragraphs
 var displayScores = function() {
     var highestScores = JSON.parse(localStorage.getItem("highScore")) || [];
     for (var i = 0; i < highestScores.length; i++) {
@@ -169,7 +175,7 @@ var displayScores = function() {
 
 
 
-// TODO: add event listeners to buttons/answers
+// event listeners to buttons/answers
 startBtn.addEventListener("click", function() {
     currentState = "quiz";
     rightOrWrong.textContent = "";
@@ -186,6 +192,7 @@ againBtn.addEventListener("click", function() {
     switchStates();
 });
 
+// allows right and wrong answers to be selected in quiz. Subtracts ten seconds from timeLeft if given a wrong answer
 questionsEl.addEventListener("click", function(event){
     var element = event.target;
     rightOrWrong.textContent = "";
@@ -215,6 +222,7 @@ questionsEl.addEventListener("click", function(event){
     }
 });
 
+// switches state and content of "View High Scores" so user can navigate from start state to score state and back
 viewScoresEL.addEventListener("click", function() {
     if (currentState === "start") {
         viewScoresEL.textContent = "Back";
@@ -232,4 +240,5 @@ viewScoresEL.addEventListener("click", function() {
 })
 
 
+// initializes page
 init();
