@@ -66,11 +66,11 @@ button:hover {
 
 #questions button {
     margin: 8px auto;
-    width: 10%;
+    width: 11%;
 }
 
 #questions button:hover {
-    width: 11%;
+    width: 12%;
     transition: all 250ms ease;
 }
 
@@ -86,6 +86,8 @@ button:hover {
 #initials {
     display: block;
     margin: 8px auto;
+    border: 1px dotted black;
+    resize: none;
 }
 
 #leaderboard {
