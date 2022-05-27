@@ -182,7 +182,7 @@ saveBtn.addEventListener("click", function() {
 });
 
 againBtn.addEventListener("click", function() {
-    currentState = "start"
+    currentState = "start";
     switchStates();
 });
 
