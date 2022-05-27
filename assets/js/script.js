@@ -22,8 +22,6 @@ var answer3El = document.createElement("button");
 var answer4El = document.createElement("button");
 var rightOrWrong = document.createElement("p");
 
-rightOrWrong.textContent = "";
-
 // TODO: write questions array
 var questions = [{
     question: "What would you use to iterate through an array?",
@@ -112,6 +110,7 @@ var switchStates = function () {
         endEl.style.display = "none";
         scoresEl.style.display = "block";
         saveScores();
+        leaderboardEl.innerHTML = "";
         displayScores();
     }
 };
@@ -166,6 +165,7 @@ var displayScores = function() {
 // TODO: add event listeners to buttons/answers
 startBtn.addEventListener("click", function() {
     currentState = "quiz";
+    rightOrWrong.textContent = "";
     switchStates();
 });
 
@@ -181,6 +181,7 @@ againBtn.addEventListener("click", function() {
 
 questionsEl.addEventListener("click", function(event){
     var element = event.target;
+    rightOrWrong.textContent = "";
     if (element.matches("button")) {
         if (element.textContent === questions[questionsIndex].correct) {
             quizEl.appendChild(rightOrWrong);
